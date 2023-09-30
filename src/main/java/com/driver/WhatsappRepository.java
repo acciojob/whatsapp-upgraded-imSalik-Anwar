@@ -14,6 +14,7 @@ public class WhatsappRepository {
     Map<User, List<Message>> userMessageDB = new HashMap<>();
 
     int groupCount = 0;
+    int personalChat = 0;
 
     public String createUser(String name, String mobile) {
         if(userDB.containsKey(mobile)){
@@ -31,11 +32,12 @@ public class WhatsappRepository {
         int count = users.size();
         // create a new group
         Group group = new Group();
-        groupCount++;
         if(count == 2){
+            personalChat++;
             group.setName(users.get(1).getName());
             group.setNumberOfParticipants(1);
         } else {
+            groupCount++;
             group.setName("Group "+groupCount);
             group.setNumberOfParticipants(count);
         }
