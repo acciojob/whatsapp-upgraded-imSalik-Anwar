@@ -28,12 +28,12 @@ public class WhatsappRepository {
     }
 
     public Group createGroup(List<User> users) {
-        // check if all the users exist in userDB
+        /* check if all the users exist in userDB
         for(User user : users){
             if(!userDB.containsKey(user.getMobile())){
                 return null;
             }
-        }
+        }*/
         // get first user to make Admin
         String admin = users.get(0).getName();
         // get total count of users
