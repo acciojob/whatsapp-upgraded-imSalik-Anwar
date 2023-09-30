@@ -38,6 +38,7 @@ public class WhatsappRepository {
         }
         // save group in groupDB
         groupParticipantDB.put(group, users);
+        groupMessageDB.put(group, new ArrayList<>());
         return group;
     }
 
@@ -125,8 +126,8 @@ public class WhatsappRepository {
                     throw new AdminCanNotBeRemovedException("Cannot remove admin");
                 } else if(groupParticipantDB.get(group).get(i) == user){
                     groupParticipantDB.get(group).remove(i);
+                    group.setName("Group "+String.valueOf(group.getNumberOfParticipants() -1));
                     group.setNumberOfParticipants(group.getNumberOfParticipants() - 1);
-                    group.setName("Group "+String.valueOf(group.getNumberOfParticipants() + 1));
                     targetGroup = group;
                     removed = true;
                     break;
