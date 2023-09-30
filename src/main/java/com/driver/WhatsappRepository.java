@@ -1,9 +1,6 @@
 package com.driver;
 
-import com.driver.exception.AdminCanNotBeRemovedException;
-import com.driver.exception.GroupDoesNotExistsException;
-import com.driver.exception.UserAlreadyExistsException;
-import com.driver.exception.UserNotFoundException;
+import com.driver.exception.*;
 import org.springframework.stereotype.Repository;
 import java.util.*;
 
@@ -63,7 +60,7 @@ public class WhatsappRepository {
         }
         // check if user exists
         if(!userDB.containsKey(sender.getMobile())){
-            throw new UserNotFoundException("You are not allowed to send message");
+            throw new YouAreNotAllowedToSendMessageException("You are not allowed to send message");
         }
         // add message to corresponding group
         if(!groupMessageDB.containsKey(group)){
