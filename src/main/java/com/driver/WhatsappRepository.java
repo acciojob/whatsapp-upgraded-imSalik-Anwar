@@ -13,6 +13,8 @@ public class WhatsappRepository {
 
     Map<User, List<Message>> userMessageDB = new HashMap<>();
 
+    int groupCount = 0;
+
     public String createUser(String name, String mobile) {
         if(userDB.containsKey(mobile)){
             throw new UserAlreadyExistsException("User already exists.");
@@ -29,11 +31,12 @@ public class WhatsappRepository {
         int count = users.size();
         // create a new group
         Group group = new Group();
+        groupCount++;
         if(count == 2){
             group.setName(users.get(1).getName());
             group.setNumberOfParticipants(1);
         } else {
-            group.setName("Group "+String.valueOf(count-1));
+            group.setName("Group "+groupCount);
             group.setNumberOfParticipants(count);
         }
         // save group in groupDB
@@ -126,7 +129,7 @@ public class WhatsappRepository {
                     throw new AdminCanNotBeRemovedException("Cannot remove admin");
                 } else if(groupParticipantDB.get(group).get(i) == user){
                     groupParticipantDB.get(group).remove(i);
-                    group.setName("Group "+String.valueOf(group.getNumberOfParticipants() -1));
+//                    group.setName("Group "+String.valueOf(group.getNumberOfParticipants() -1));
                     group.setNumberOfParticipants(group.getNumberOfParticipants() - 1);
                     targetGroup = group;
                     removed = true;
