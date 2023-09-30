@@ -28,14 +28,6 @@ public class WhatsappRepository {
     }
 
     public Group createGroup(List<User> users) {
-        /* check if all the users exist in userDB
-        for(User user : users){
-            if(!userDB.containsKey(user.getMobile())){
-                return null;
-            }
-        }*/
-        // get first user to make Admin
-        String admin = users.get(0).getName();
         // get total count of users
         int count = users.size();
         // create a new group
@@ -45,7 +37,7 @@ public class WhatsappRepository {
             group.setNumberOfParticipants(1);
         } else {
             group.setName("Group "+String.valueOf(count-1));
-            group.setNumberOfParticipants(count-1);
+            group.setNumberOfParticipants(count);
         }
         // save group in groupDB
         groupParticipantDB.put(group, users);
@@ -137,7 +129,7 @@ public class WhatsappRepository {
                 } else if(groupParticipantDB.get(group).get(i) == user){
                     groupParticipantDB.get(group).remove(i);
                     group.setNumberOfParticipants(group.getNumberOfParticipants() - 1);
-                    group.setName("Group "+String.valueOf(group.getNumberOfParticipants()));
+                    group.setName("Group "+String.valueOf(group.getNumberOfParticipants() + 1));
                     targetGroup = group;
                     removed = true;
                     break;
